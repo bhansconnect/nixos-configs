@@ -33,6 +33,12 @@ in
     memoryPercent = 150;
   };
 
+  # Extra swap control.
+  boot.kernel.sysctl = {
+    "vm.dirty_background_ratio" = 5;
+    "vm.dirty_ratio" = 60;
+  };
+
   networking = {
     hostName = "NotTim"; # Define your hostname.
     hostId = "43048d3c";
