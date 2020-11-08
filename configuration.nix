@@ -54,6 +54,7 @@ in
       };
     };
     nameservers = [ "8.8.8.8" "8.8.4.4" "208.67.222.222" "208.67.220.220" ];
+    # networkmanager.enable = true;
 
     # The global useDHCP flag is deprecated, therefore explicitly set to false here.
     # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -145,7 +146,7 @@ in
     users.bren077s = {
       isNormalUser = true;
       shell = pkgs.zsh;
-      extraGroups = [ "wheel" "video" "audio" "disk" "network-manager" ];
+      extraGroups = [ "wheel" "video" "audio" "disk" "networkmanager" ];
       hashedPassword = "$6$43WewimBbBQLy$ZaxEe5tJfF24uk8czcI91M9yd0vLfIhgHlC2rvpS2VBbeDdr7.mOTPLEPV8HhrlizScjsmy5FLg.J3pWWYrsy1";
     };
   };
@@ -207,7 +208,7 @@ in
   # };
   programs.dconf.enable = true;
   programs.zsh.enable = true;
-  programs.nm-applet.enable = true;
+  # programs.nm-applet.enable = true;
 
   # Enable lorri for development.
   services.lorri.enable = true;
