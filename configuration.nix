@@ -31,6 +31,7 @@ in
   zramSwap = {
     enable = true;
     memoryPercent = 150;
+    algorithm = "lzo-rle";
   };
 
   # Extra swap control.
