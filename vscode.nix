@@ -30,6 +30,7 @@
     # mjmcloug.vscode-elixir
     ## 13xforever.language-x86-64-assembly
     ## tiehuis.zig
+    bbenoist.Nix
   ];
   userSettings = {
     "keyboard.dispatch" = "keyCode";

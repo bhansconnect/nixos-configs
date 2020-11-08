@@ -32,7 +32,8 @@ in
       enable = true;
       enableAutosuggestions = true;
       shellAliases = {
-        c = "code .";
+        # c = "code .";
+        c = "codium .";
         suod = "sudo";
         blaze = "bazel";
         gowatch = "fswatch -r -0 --monitor=poll_monitor $(find . -name \"*.go\") | xargs -0 -n1 -I{}";
