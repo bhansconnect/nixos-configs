@@ -234,8 +234,8 @@ in {
         };
         bindingMode = {
           border = "#16a085";
-          background = "#c2c2c2";
-          text = "#ffffff";
+          background = "#222d31";
+          text = "#f9faf9";
         };
       };
     }];
