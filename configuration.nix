@@ -18,7 +18,7 @@ in
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./home-manager.nix
-      ./blurlock.nix
+      ./small-scripts.nix
     ];
 
   # Use the systemd-boot EFI boot loader.

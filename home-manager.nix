@@ -59,6 +59,10 @@ in
         config = {
           modifier = "${mod}";
           workspaceAutoBackAndForth = true;
+          focus.followMouse = false;
+          window.titlebar = false;
+          window.hideEdgeBorders = "none";
+          fonts = ["URWGothic-Book 11" "FiraCode 11"];
           startup = [
             {command = "pa-applet"; notification = false;} 
             #{command = "fctx -d"; notification = false;} 
@@ -85,11 +89,11 @@ in
             #"${mod}+z" = "exec --no-startup-id dmenu-frecency";
 
             # Keyboard Layout Swapping
-            #"${mod}+x" = "exec --no-startup-id /home/bren077s/keylayout.sh";
+            "${mod}+x" = "exec --no-startup-id keylayout";
 
             # Monitor Control
-            #"$mod+Shift+m" = "exec --no-startup-id /home/bren077s/configmonitor.sh";
-            #"$mod+k" = "exec --no-startup-id /home/bren077s/togglemonitor.sh";
+            "${mod}+Shift+m" = "exec --no-startup-id config-monitor";
+            "${mod}+k" = "exec --no-startup-id toggle-virtual-monitor";
 
             # Murder
             "${mod}+Shift+q" = "kill";
@@ -177,7 +181,7 @@ in
             # Misc Control
             "${mod}+t" = "fullscreen toggle";
             "${mod}+Shift+space" = "floating toggle";
-            "${mod}+space" = "mode_toggle";
+            "${mod}+space" = "focus mode_toggle";
             "${mod}+Shift+h" = "bar mode toggle";
             "${mod}+Shift+minus" = "move scratchpad";
             "${mod}+minus" = "scratchpad show";
