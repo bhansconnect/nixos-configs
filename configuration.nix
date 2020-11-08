@@ -207,6 +207,7 @@ in
   # };
   programs.dconf.enable = true;
   programs.zsh.enable = true;
+  programs.nm-applet.enable = true;
 
   # Enable lorri for development.
   services.lorri.enable = true;
