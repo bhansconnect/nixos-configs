@@ -98,6 +98,8 @@ in
       windowManager.i3 = import ./i3.nix { i3status = pkgs.i3status; };
     };
 
+    programs.neovim = import ./nvim.nix { vimPlugins = pkgs.vimPlugins; };
+
     home.packages = with pkgs; [
       i3lock i3status dmenu
     ];
