@@ -99,6 +99,7 @@ in
     };
 
     programs.neovim = import ./nvim.nix { vimPlugins = pkgs.vimPlugins; };
+    programs.vscode = import ./vscode.nix { vscodium = pkgs.vscodium; vscode-extensions = pkgs.vscode-extensions; };
 
     home.packages = with pkgs; [
       i3lock i3status dmenu
