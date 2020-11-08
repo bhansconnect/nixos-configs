@@ -66,7 +66,7 @@ in
             {command = "blueman-applet"; notification = false;} 
             {command = "xfce4-power-manager"; notification = false;} 
             {command = "caffeine"; notification = false;} 
-            #{command = "xautolock -time 10 -locker blurlock"; notification = false;} 
+            {command = "xautolock -time 10 -locker blurlock"; notification = false;} 
           ];
           keybindings = {
             # Start Applications
@@ -134,7 +134,7 @@ in
 
             # Workspace Control
             "${mod}+b" = "workspace back_and_forth";
-            "${mod}Shift+b" = "move container to workspace back_and_forth; workspace back_and_forth";
+            "${mod}+Shift+b" = "move container to workspace back_and_forth; workspace back_and_forth";
             "${mod}+Ctrl+Right" = "workspace next";
             "${mod}+Ctrl+Left" = "workspace prev";
             "${mod}+m" = "move workspace to output left";
@@ -185,17 +185,17 @@ in
             # i3 Control
             "${mod}+Shift+c" = "reload";
             "${mod}+Shift+r" = "restart";
-            #"${mod}+9" = "exec --no-startup-id blurlock";
+            "${mod}+9" = "exec --no-startup-id blurlock";
             "${mod}+0" = "mode \"${modeSystem}\"";
           };
           modes = {
             "${modeSystem}" = {
-              "l" = "exec --no-statup-id blurlock";
-              "s" = "exec --no-statup-id systemctl suspend";
-              "e" = "exec --no-statup-id i3-msg exit";
-              "h" = "exec --no-statup-id systemctl hibernate";
-              "r" = "exec --no-statup-id systemctl reboot";
-              "Shift+s" = "exec --no-statup-id systemctl poweroff";
+              "l" = "exec --no-startup-id blurlock, mode default";
+              "s" = "exec --no-startup-id \"blurlock; systemctl suspend\", mode default";
+              "e" = "exec --no-startup-id i3-msg exit, mode default";
+              "h" = "exec --no-startup-id \"blurlock; systemctl hibernate\", mode default";
+              "r" = "exec --no-startup-id systemctl reboot, mode default";
+              "Shift+s" = "exec --no-startup-id systemctl poweroff, mode default";
               "Return" = "mode default";
               "Escape" = "mode default";
             };
