@@ -1,3 +1,5 @@
+{ i3status }:
+
 let
   mod = "Mod4";
   modeSystem = "(l)ock, (e)xit, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown";
@@ -7,8 +9,49 @@ in {
     modifier = "${mod}";
     workspaceAutoBackAndForth = true;
     focus.followMouse = false;
-    window.titlebar = false;
-    window.hideEdgeBorders = "none";
+    window = {
+      titlebar = false;
+      hideEdgeBorders = "none";
+      border = 1;
+    };
+    colors = {
+      background = "#2b2c2b";
+      focused = {
+        border      = "#556064";
+        background  = "#556064";
+        text        = "#80fff9";
+        indicator   = "#fdf6e3";
+        childBorder = "#556064";
+      };
+      focusedInactive = {
+        border      = "#2f3d44";
+        background  = "#2f3d44";
+        text        = "#1abc9c";
+        indicator   = "#454948";
+        childBorder = "#2f3d44";
+      };
+      unfocused = {
+        border      = "#2f3d44";
+        background  = "#2f3d44";
+        text        = "#1abc9c";
+        indicator   = "#454948";
+        childBorder = "#2f3d44";
+      };
+      urgent = {
+        border      = "#cb4b16";
+        background  = "#fdf6e3";
+        text        = "#1abc9c";
+        indicator   = "#268bd2";
+        childBorder = "#fdf6e3";
+      };
+      placeholder = {
+        border      = "#000000";
+        background  = "#0c0c0c";
+        text        = "#ffffff";
+        indicator   = "#000000";
+        childBorder = "#0c0c0c";
+      };
+    };
     startup = [
       {command = "pa-applet"; notification = false;} 
       #{command = "fctx -d"; notification = false;} 
@@ -17,6 +60,8 @@ in {
       {command = "xfce4-power-manager"; notification = false;} 
       {command = "caffeine"; notification = false;} 
       {command = "xautolock -time 10 -locker blurlock"; notification = false;} 
+      {command = "i3-sensible-terminal --title dropdown --class dropdown,dropdown -e tmux"; notification = false;} 
+      {command = "i3-sensible-terminal --title math --class math,math -e python3 -q"; notification = false;} 
     ];
     keybindings = {
       # Start Applications
@@ -132,6 +177,10 @@ in {
       "${mod}+Shift+minus" = "move scratchpad";
       "${mod}+minus" = "scratchpad show";
 
+      # Dropdown Control
+      "${mod}+f" = "[instance = \"dropdown\"] scratchpad show";
+      "${mod}+w" = "[instance = \"math\"] scratchpad show";
+
       # i3 Control
       "${mod}+Shift+c" = "reload";
       "${mod}+Shift+r" = "restart";
@@ -150,5 +199,57 @@ in {
         "Escape" = "mode default";
       };
     };
+    bars = [{
+      mode = "dock";
+      hiddenState = "hide";
+      position = "bottom";
+      workspaceButtons = true;
+      workspaceNumbers = true;
+      statusCommand = "${i3status}/bin/i3status";
+      fonts = [ "URQGothic-Book 11" "FiraCode 11" "Monospace 10" ];
+      trayOutput = "primary";
+      colors = {
+        background = "#222d31";
+        statusline = "#f9faf9";
+        separator = "#454947";
+        focusedWorkspace = {
+          border = "#f9faf9";
+          background = "#16a085";
+          text = "#292f34";
+        };
+        activeWorkspace = {
+          border = "#595b5b";
+          background = "#353836";
+          text = "#fdf6e3";
+        };
+        inactiveWorkspace = {
+          border = "#595b5b";
+          background = "#222d31";
+          text = "#eee8d5";
+        };
+        urgentWorkspace = {
+          border = "#16a085";
+          background = "#fdf6e3";
+          text = "#e5201d";
+        };
+        bindingMode = {
+          border = "#16a085";
+          background = "#c2c2c2";
+          text = "#ffffff";
+        };
+      };
+    }];
   };
+  extraConfig = ''
+    # dropdown terminal and python
+    for_window [class = "dropdown"] floating enable
+    for_window [class = "dropdown"] resize set 1920 400
+    for_window [class = "dropdown"] move position 0 0
+    for_window [class = "dropdown"] move scratchpad
+
+    for_window [class = "math"] floating enable
+    for_window [class = "math"] resize set 1920 400
+    for_window [class = "math"] move position 0 0
+    for_window [class = "math"] move scratchpad
+  '';
 }

@@ -176,7 +176,9 @@ in
     powertop
     iotop
     vim
+    tmux
     ripgrep
+    python3
     pavucontrol
     pa_applet
     nvidia-offload
