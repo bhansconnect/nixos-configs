@@ -6,7 +6,7 @@
 4) Use `ls -l /dev/disk/by-id/` to find the correct device id
 5) `DISK=/dev/disk/by-id/<id>`
 6) Create boot partition with `sgdisk -n 0:0:+1GiB -t 0:EF00 -c 0:boot $DISK`
-7) Create swap partition with `sgdisk -n 0:0:+20GiB -t 0:8200 -c 0:swap $DISK`
+7) Create swap partition with `sgdisk -n 0:0:+20GiB -t 0:8200 -c 0:swap $DISK`. You likely want the size to be at least 2x ram for hibernate. Because of ZRam, potentially you could be using much more ram.
 8) Create ZFS partition with `sgdisk -n 0:0:0 -t 0:BF01 -c 0:ZFS $DISK`
 9) Save new variables with `BOOT=$DISK-part1;SWAP=$DISK-part2;ZFS=$DISK-part3`
 10) Set pool name variable `PNAME=<name>`
