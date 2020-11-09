@@ -224,6 +224,9 @@ in
   services.zfs.autoSnapshot.enable = true;
   services.zfs.autoScrub.enable = true;
 
+  # Enable the OpenSSH server.
+  services.sshd.enable = true;
+
   # Nix gc.
   nix.gc = {
     automatic = true;
