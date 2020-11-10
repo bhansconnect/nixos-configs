@@ -12,6 +12,13 @@ let
     export __VK_LAYER_NV_optimus=NVIDIA_only
     exec -a "$0" "$@"
   '';
+  commaSrc = pkgs.fetchFromGitHub {
+    owner = "Shopify";
+    repo = "comma";
+    rev = "4a62ec17e20ce0e738a8e5126b4298a73903b468";
+    sha256 = "0n5a3rnv9qnnsrl76kpi6dmaxmwj1mpdd2g0b4n1wfimqfaz6gi1";
+  };
+  comma = pkgs.callPackage commaSrc {};
 in
 {
   imports =
@@ -179,6 +186,7 @@ in
     xfce.xfce4-power-manager
     xautolock
 
+    comma
     caffeine-ng
     htop
     powertop
