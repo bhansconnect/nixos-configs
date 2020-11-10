@@ -24,8 +24,9 @@ zfs create -o refreservation=1G -o mountpoint=none $PNAME/reserved
 ```
 12) Play with recordsize if you want with `zfs set recordsize=32k $PNAME`
 13) Enable snapshots for safe with `zfs set com.sun:auto-snapshot=true $PNAME/safe`
-14) Enable trim with `zfs set autotrim=on $PNAME`
-15) Mount everything zfs with
+14) Allow send and snapshots from user `zfs allow -u bren077s hold,snapshot,send NotTim`
+15) Enable trim with `zfs set autotrim=on $PNAME`
+16) Mount everything zfs with
 ```
 mount -t zfs $PNAME/local/root /mnt
 mkdir /mnt/var
@@ -37,25 +38,25 @@ mount -t zfs $PNAME/safe/home /mnt/home
 mkdir -p /mnt/etc/nixos
 mount -t zfs $PNAME/safe/nixconfig /mnt/etc/nixos
 ```
-16) Setup boot with
+17) Setup boot with
 ```
 mkfs.vfat $BOOT
 mkdir /mnt/boot
 mount $BOOT /mnt/boot
 ```
-17) Setup swap with
+18) Setup swap with
 ```
 mkswap -L swap $SWAP
 swapon $SWAP
 
 ```
-19) Setup tmpfs with
+20) Setup tmpfs with
 ```
 mkdir /mnt/tmp
 mount -t tmpfs none /mnt/tmp
 ```
-18) Generate the config with `nixos-generate-config --root /mnt`
-19) Double check `/etc/nixos/hardware-configuration.nix` using the referecence `hardware-configuration.nix`
-20) Copy over all files except `hardware-configuration.nix`
-21) Maybe change the host id to `head -c 8 /etc/machine-id`
-22) `nixos-install` and `reboot`
+19) Generate the config with `nixos-generate-config --root /mnt`
+20) Double check `/etc/nixos/hardware-configuration.nix` using the referecence `hardware-configuration.nix`
+21) Copy over all files except `hardware-configuration.nix`
+22) Maybe change the host id to `head -c 8 /etc/machine-id`
+23) `nixos-install` and `reboot`
