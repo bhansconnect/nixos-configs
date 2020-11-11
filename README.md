@@ -24,7 +24,7 @@ zfs create -o refreservation=1G -o mountpoint=none $PNAME/reserved
 ```
 12) Play with recordsize if you want with `zfs set recordsize=32k $PNAME`
 13) Enable snapshots for safe with `zfs set com.sun:auto-snapshot=true $PNAME/safe`
-14) Allow send and snapshots from user `zfs allow -u bren077s hold,snapshot,send NotTim`
+14) Allow zfs permissions from user `zfs allow -u bren077s create,compression,destroy,snapshot,snapdir,hold,mount,mountpoint,send,rename,receive,quota,refquota NotTim`
 15) Enable trim with `zfs set autotrim=on $PNAME`
 16) Mount everything zfs with
 ```

@@ -5,6 +5,39 @@
 { config, pkgs, ... }:
 
 let
+  src-pool = "NotTim/safe";
+  dst-pool = "data1/backup";
+  zfs-backup-setup = pkgs.writeShellScriptBin "zfs-backup-setup" ''
+    set -e
+    zfs snapshot -r ${src-pool}@current
+    zfs send -Rc ${src-pool}@current \
+      | pv -rtab \
+      | zstd -c --adapt \
+      | mbuffer -q -s 128k -m 1G 2>/dev/null \
+      | ssh "$1" "\
+        mbuffer -q -s 128k -m 1G 2>/dev/null \
+        | zstd -c -d \
+        | zfs recv -o snapdir=visible -x mountpoint ${dst-pool} \
+      "
+  '';
+  zfs-backup = pkgs.writeShellScriptBin "zfs-backup" ''
+    zfs rename -r ${src-pool}@current ${src-pool}@last
+    set -e
+    zfs snapshot -r ${src-pool}@current
+    zfs send -Rc -I ${src-pool}@last ${src-pool}@current \
+      | pv -rtab \
+      | zstd -c --adapt \
+      | mbuffer -q -s 128k -m 1G 2>/dev/null \
+      | ssh "$1" "\
+        mbuffer -q -s 128k -m 1G 2>/dev/null \
+        | zstd -c -d \
+        | zfs recv -F -o snapdir=visible -x mountpoint ${dst-pool} \
+      "
+    zfs destroy -r ${src-pool}@last
+    ssh "$1" "\
+      zfs destroy -r ${dst-pool}@last \
+    "
+  '';
   nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
     export __NV_PRIME_RENDER_OFFLOAD=1
     export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
@@ -189,11 +222,17 @@ in
     comma
     caffeine-ng
     htop
+    nmon
     powertop
     iotop
     vim
     tmux
     ripgrep
+    zfs-backup
+    zfs-backup-setup
+    zstd
+    mbuffer
+    pv
     python3
     pavucontrol
     pa_applet
