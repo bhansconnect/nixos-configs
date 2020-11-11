@@ -97,7 +97,13 @@ in
     xsession = {
       enable = true;
       windowManager.i3 = import ./i3.nix { i3status = pkgs.i3status; };
+      pointerCursor = {
+        package = pkgs.vanilla-dmz;
+        name = "Vanilla-DMZ";
+      };
     };
+
+    services.dunst.enable = true;
 
     programs.neovim = import ./nvim.nix { vimPlugins = pkgs.vimPlugins; };
     programs.vscode = import ./vscode.nix { vscodium = pkgs.vscodium; vscode-extensions = pkgs.vscode-extensions; };

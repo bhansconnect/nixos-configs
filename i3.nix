@@ -165,7 +165,7 @@ in {
       "${mod}+h" = "split h";
       "${mod}+v" = "split v";
       #"${mod}+h" = "split h;exec notify-send 'tile-horizontally'";
-      #"${mod}+v" = "split v;exec notify-send 'tile-horizontally'";
+      #"${mod}+v" = "split v;exec notify-send 'tile-vertically'";
       #"${mod}+q" = "split toggle";
       "${mod}+q" = "layout toggle split";
 
